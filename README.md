@@ -4,6 +4,10 @@ An Astro starter for small-business marketing sites. The same skeleton I use to 
 
 Static-first, zero-JS by default, near-perfect Core Web Vitals on cheap hosting. Every customer-facing string lives in **one config file**, so a new site is a 30-minute job: edit `src/site.config.ts`, set a domain in `astro.config.mjs`, and ship.
 
+Built by [@sansware](https://github.com/sansware) (Jordan Gilbert, [bio](https://ukwebmarketing.com/jordan)).
+
+[![Built with Astro](https://astro.badg.es/v2/built-with-astro/tiny.svg)](https://astro.build)
+
 ## What you get
 
 - **Home page** — config-driven hero, services grid, "why us", "how it works", service areas, blog teaser, contact CTA.
@@ -147,6 +151,8 @@ Never commit `.env`. The `.gitignore` already excludes it.
 4. Add a custom domain.
 
 Both work. Cloudflare Pages has the more generous free tier; Vercel has better preview deploys.
+
+For EU-sovereign region-pinning, see the [sovereignty checklist](https://github.com/sansware/eu-sovereignty-checklist).
 
 ## File structure
 
