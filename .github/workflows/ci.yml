@@ -27,7 +27,8 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 20
-          cache: pnpm
+          # No lockfile is committed (this is a starter template), so pnpm caching cannot work:
+          # setup-node v4 tolerated that, v7 and pnpm/action-setup v6 fail the run on it.
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile=false
