@@ -26,7 +26,7 @@ Built by [@sansware](https://github.com/sansware) (Jordan Gilbert, [bio](https:/
 | Framework | [Astro](https://astro.build) 5 | Zero JS by default. Ships HTML; hydrates only what you tell it to. |
 | Hosting | [Cloudflare Pages](https://pages.cloudflare.com) (or Vercel) | Global edge cache, free tier, automatic HTTPS. |
 | Forms | [Formspree](https://formspree.io) (default) or any webhook | No backend needed. Swap the action URL in `contact.astro`. |
-| Email | [Resend](https://resend.com) (optional) | Wire up in a serverless function if you need transactional email. |
+| Email | None in the template (optional) | Static-only, so nothing here sends email. A site that needs transactional email sends it from an account in the client's own name: see [Transactional email](#transactional-email). |
 | CAPTCHA | [Cloudflare Turnstile](https://www.cloudflare.com/products/turnstile/) (optional) | Privacy-friendly, EU-hostable, no cookies. |
 | Payments | [Stripe Elements](https://stripe.com/payments/elements) (optional) | Drop-in payment form. PCI scope minimised. |
 
@@ -129,10 +129,21 @@ The `.env.example` lists the env vars used by optional integrations. Copy to `.e
 
 - `PUBLIC_FORM_ENDPOINT` — alternate form endpoint (Web3Forms, your own webhook).
 - `PUBLIC_TURNSTILE_SITE_KEY` — if you want CAPTCHA on the contact form.
-- `RESEND_API_KEY` — server-only; only used in serverless functions.
 - `PUBLIC_STRIPE_PUBLISHABLE_KEY` — if the site has Stripe Elements anywhere.
 
 Never commit `.env`. The `.gitignore` already excludes it.
+
+## Transactional email
+
+The template sends no email and names no email variable: it ships static-only. When a site needs transactional email (enquiry notices, acknowledgements, booking and order confirmations, password resets), add a serverless function, and follow these rules:
+
+- **The account is in the client's own name.** The client holds the contract with the email provider and is the controller of the data. You set it up and, if they ask, run it for them as their processor.
+- **Use one of two providers**, both of which keep the email data in the EU:
+  - [Scaleway Transactional Email](https://github.com/scaleway/docs-content/blob/main/pages/transactional-email/reference-content/data-privacy.mdx) (Scaleway, France): stored and processed in France, email content deleted as soon as processing ends, no tracking pixels or rewritten links. Marketing email is not allowed on it.
+  - [Lettermint](https://lettermint.co/dpa) (Lettermint B.V., the Netherlands): email data processed in the EU (its DPA, section 8.1). Send on a transactional route; marketing goes only on a separate broadcast route.
+- **Never an agency-shared account.** On a shared account, one site's form abused for spam, or a run of bounces, can get the account suspended and stop every other site's email with it.
+- **Never anything promotional in a transactional email.** Newsletters and campaigns are a separate service, on the client's own account too.
+- Set up SPF, DKIM and DMARC for the client's sending domain before the first email goes out.
 
 ## Deploying
 
