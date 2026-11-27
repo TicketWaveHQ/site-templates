@@ -21,5 +21,5 @@ Issues affecting a single live deployment (rather than the template itself) shou
 
 ## Out of scope
 
-- Findings on third-party services referenced in `.env.example` (Formspree, Resend, Stripe, Cloudflare Turnstile) — report those to the respective vendors.
+- Findings on third-party services referenced in this repository (Formspree, Scaleway, Lettermint, Stripe, Cloudflare Turnstile): report those to the respective vendors.
 - Best-practice suggestions with no concrete impact — please open a regular GitHub issue or PR instead.
